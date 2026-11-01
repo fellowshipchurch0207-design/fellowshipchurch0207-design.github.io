@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="주일 나눔지">
+<meta name="theme-color" content="#f0e9dc">
+<style>
+  :root{color-scheme:light;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;min-height:100%;font:14px system-ui,-apple-system,sans-serif;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  @supports(padding:max(0px)){ body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);} }
+</style>
+<title>주일 나눔지</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800;900&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap">
+<style>
+/* 레이아웃: 휴대폰 단일 컬럼. 상단 주차 선택 + 3개 탭 → 그 아래 '카드 이미지'와 같은 모양의 카드 한 장(탭마다 교체). */
+:root{
+  --bg:#f0e9dc; --chrome:#fffdf9; --ink:#2a2621; --soft:#5c554c; --muted:#938779; --line:#e6dccb;
+  --clay:#c8613d; --clay-deep:#a7481f; --clay-soft:#f2e0d2;
+  --display:'Gothic A1','Noto Sans KR',sans-serif;
+  --body:'Noto Sans KR',sans-serif;
+  --serif:'Noto Serif KR',serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17130f; --chrome:#241e17; --ink:#f0e9dd; --soft:#cabfae; --muted:#9d9082; --line:#352d25;
+  --clay:#e5895f; --clay-deep:#f0a179; --clay-soft:#3a2a20;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#17130f; --chrome:#241e17; --ink:#f0e9dd; --soft:#cabfae; --muted:#9d9082; --line:#352d25;
+  --clay:#e5895f; --clay-deep:#f0a179; --clay-soft:#3a2a20;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:480px;margin:0 auto;padding-block:14px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));}
+
+/* 상단 바 */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.bar .who{display:flex;align-items:center;gap:9px;min-width:0;}
+.bar .dotmark{width:11px;height:11px;border-radius:50%;background:linear-gradient(140deg,var(--clay),#e3a57f);flex-shrink:0;}
+.bar .who b{font-family:var(--display);font-size:14px;font-weight:800;-webkit-user-select:none;user-select:none;cursor:default;}
+.leaderchip{font-family:var(--display);font-size:11px;font-weight:800;color:#fff;background:var(--clay);
+  border-radius:999px;padding:3px 10px;cursor:pointer;letter-spacing:.5px;}
+.bar select{font-family:var(--body);font-size:13px;font-weight:600;color:var(--ink);
+  background:var(--chrome);border:1px solid var(--line);border-radius:10px;padding:7px 9px;max-width:56vw;}
+.bar select:focus-visible{outline:2px solid var(--clay);outline-offset:1px;}
+
+/* 탭 */
+.tabs{display:flex;gap:6px;background:var(--chrome);border:1px solid var(--line);border-radius:14px;padding:5px;margin-bottom:14px;}
+.tab{flex:1;min-width:0;border:none;background:transparent;color:var(--soft);cursor:pointer;
+  font-family:var(--display);font-weight:700;font-size:13.5px;padding:10px 4px;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.15;transition:background .15s,color .15s;}
+.tab .tn{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--muted);}
+.tab[aria-selected="true"]{background:var(--clay);color:#fff;}
+.tab[aria-selected="true"] .tn{color:#ffe7da;}
+.tab:focus-visible{outline:2px solid var(--clay);outline-offset:2px;}
+
+/* ===== 카드(이미지와 동일한 모양 · 고정 크림/클레이) ===== */
+.card{background:#f6f1e9;color:#2a2621;border-radius:20px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(60,40,24,.14);font-family:var(--body);}
+.ctop{height:8px;background:linear-gradient(90deg,#c8613d,#e0a383,#c8613d);}
+.chead{padding:30px 26px 20px;}
+.kick{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:5px;color:#c8613d;}
+.church{font-family:var(--display);font-size:18px;font-weight:800;color:#3a342c;margin-top:9px;}
+.meta{font-size:13px;color:#9a8f7e;margin-top:5px;font-weight:500;}
+.bigtitle{font-family:var(--display);font-weight:900;font-size:clamp(25px,7.4vw,32px);line-height:1.22;
+  letter-spacing:-.5px;color:#2a2621;margin-top:20px;text-wrap:balance;}
+.smref{font-family:var(--display);font-weight:700;font-size:15px;color:#c8613d;margin-top:11px;}
+.cdiv{height:1px;background:#e3d8c6;margin:0 26px;}
+.cbody{padding:22px 26px 24px;min-height:330px;}
+.ctag{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.ctag .dot{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:#f0ddce;border:2px solid #c8613d;
+  color:#c8613d;font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;}
+.ctag .tt{min-width:0;}
+.ctag .tt small{display:block;font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:4px;color:#b6a994;margin-bottom:2px;}
+.ctag .tt b{font-family:var(--display);font-size:21px;font-weight:800;color:#2a2621;letter-spacing:.3px;}
+
+.qlist{display:flex;flex-direction:column;gap:18px;}
+.q{display:flex;gap:11px;}
+.q .qn{font-family:var(--serif);font-weight:600;font-size:21px;color:#d08a5e;line-height:1.3;flex-shrink:0;}
+.q p{margin:0;font-size:15.5px;line-height:1.72;color:#39332b;}
+
+.share{font-size:16px;line-height:1.78;color:#2a2621;padding-left:15px;border-left:4px solid #d9a686;}
+.share .hint{display:block;color:#a89a86;font-size:13.5px;margin-top:13px;}
+
+.prayer{display:flex;flex-direction:column;gap:16px;}
+.prayer .stz{font-family:var(--serif);font-size:15.5px;line-height:1.82;color:#39332b;}
+.prayer .amen{font-family:var(--serif);font-size:15.5px;font-weight:600;color:#c8613d;}
+
+.cfoot{display:flex;justify-content:space-between;align-items:center;
+  padding:15px 26px 22px;border-top:1px solid #e3d8c6;font-size:13px;color:#a89a86;}
+.cfoot .pg{font-weight:700;color:#c8613d;letter-spacing:2px;}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;}
+.arrow{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--chrome);
+  color:var(--ink);font-family:var(--display);font-weight:800;font-size:17px;line-height:1;
+  padding:12px 16px;border-radius:13px;cursor:pointer;min-width:0;}
+.arrow .al{font-size:13.5px;font-weight:700;}
+.arrow:active{transform:translateY(1px);}
+.arrow:focus-visible{outline:2px solid var(--clay);outline-offset:2px;}
+.arrow[disabled]{opacity:.38;cursor:default;}
+.navdots{display:flex;gap:7px;flex-shrink:0;}
+.navdots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block;}
+.navdots i.on{background:var(--clay);}
+
+.card em{font-style:normal;font-weight:700;color:#b24e24;}
+
+.reveal{margin-top:22px;display:flex;flex-direction:column;gap:12px;}
+.revealbtn{align-self:flex-start;border:1.5px solid #c8613d;background:transparent;color:#b24e24;
+  font-family:var(--display);font-weight:800;font-size:13.5px;padding:9px 17px;border-radius:999px;cursor:pointer;}
+.revealbtn:active{transform:translateY(1px);}
+.revealbtn:focus-visible{outline:2px solid #c8613d;outline-offset:2px;}
+.ans{background:#faf3ea;border:1px solid #ecdccb;border-radius:14px;padding:16px 18px;}
+.ans .lab{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:4px;color:#b6a994;margin-bottom:12px;text-transform:uppercase;}
+.ans .arow{display:flex;gap:10px;margin-top:13px;}
+.ans .arow:first-of-type{margin-top:0;}
+.ans .arow .qn{font-family:var(--serif);font-weight:600;font-size:18px;color:#d08a5e;flex-shrink:0;line-height:1.4;}
+.ans .arow p,.ans.ex p{margin:0;font-size:15px;line-height:1.72;color:#39332b;}
+
+footer{margin-top:20px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7;}
+@media (prefers-reduced-motion:no-preference){
+  .card{animation:fade .28s ease both;}
+  @keyframes fade{from{opacity:.001;}to{opacity:1;}}
+}
+</style>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="who"><span class="dotmark"></span><b id="church">사귐이있는교회</b><span class="leaderchip" id="leader" hidden>인도자 ✕</span></div>
+    <select id="wk" aria-label="나눔지 주차 선택"></select>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="나눔지 항목">
+    <button class="tab" role="tab" id="tab0" aria-selected="true"><span class="tn">STEP 01</span>설교 확인 질문</button>
+    <button class="tab" role="tab" id="tab1" aria-selected="false"><span class="tn">STEP 02</span>나눔 질문</button>
+    <button class="tab" role="tab" id="tab2" aria-selected="false"><span class="tn">STEP 03</span>함께 드리는 기도</button>
+  </div>
+
+  <div class="card" id="card"></div>
+
+  <nav class="nav" aria-label="항목 넘기기">
+    <button class="arrow" id="prev" type="button" aria-label="이전 항목">←<span class="al" id="prevlab"></span></button>
+    <span class="navdots" id="dots" aria-hidden="true"></span>
+    <button class="arrow" id="next" type="button" aria-label="다음 항목"><span class="al" id="nextlab"></span>→</button>
+  </nav>
+
+  <footer>함께 읽고, 나누고, 기도하는 한 주 되시길 바랍니다.</footer>
+</div>
+
+<script>
+/* 매주: WEEKS 배열 맨 앞에 이번 주 항목을 추가해 같은 링크로 다시 올립니다. (최신이 맨 위) */
+const WEEKS = [
+  {
+    date:"2026. 11. 1. 주일", short:"11/1",
+    ref:"마태복음 5:38~42", title:"치욕을 치유하는 치욕",
+    checks:[
+      "“눈은 눈으로, 이는 이로”(38절)는 흔히 ‘복수를 허락하는 법’으로 오해됩니다. 그런데 설교는 이 말씀의 <em>원래 쓰임</em>이 무엇이라고 말합니까? (복수를 허락하는 법인가, 막는 법인가?)",
+      "예수님은 이 명령들을 ‘하라’고만 하신 것이 아니라, 당신의 마지막 며칠 동안 <em>친히 다 이루셨습니다.</em> 설교에서 들은 대로, 예수님이 이 설교를 어떻게 성취하셨는지 <em>기억나는 대로</em> 함께 말해 봅시다. (뺨 · 옷 · 오 리 · 빚, 네 가지와 겹쳐 보면 좋아요.)"
+    ],
+    answers:[
+      "복수를 허락하는 법이 아니라 <em>막는 법</em>입니다. 본래 재판관이 쓰던 기준으로, 받은 피해보다 더 갚지 말고 ‘딱 그만큼만’ 벌하라는 것이었습니다. 예수님은 거기서 한 걸음 더 나아가, 손등으로 치는 모욕인 오른뺨을 맞으면 <em>왼뺨도 돌려 대라</em> 하십니다.",
+      "<em>뺨</em> — 재판 자리에서 얼굴에 침 뱉음과 주먹·손바닥으로 맞으심(마 26:67). <em>옷</em> — 율법도 지켜 주던 겉옷마저 빼앗겨 발가벗겨진 채 달리심(요 19:23~24). <em>오 리</em> — ‘억지로(앙가류오)’ 끌려간 시몬과 달리, 아무도 시키지 않은 골고다 길을 <em>스스로</em> 걸으심(마 27:32). <em>빚</em> — 빚진 자리에 대신 서시어, 우리가 <em>빚 없는 자</em>로 하나님 앞에 서게 하심. ‘그 앞에 있는 기쁨(=우리)’을 위해 부끄러움을 개의치 않으심(히 12:2)."
+    ],
+    share:"설교는 우리가 ‘더 큰 치욕을 감당 못 하는 자’이기 전에, 사실 <em>치욕을 주는 자</em>일 때가 많다고 짚습니다 — 말과 비웃음으로 깎아내리고, 내 책임을 힘으로 떠넘기고, 배우자·자녀를 낙심시키기도 하죠.<br><br>혹시 요즘 내가 가진 힘(돈·위치·권한)으로 누군가에게 알게 모르게 치욕을 주는 자리는 없나요?<br><br>그리스도께서 이미 <em>‘더 좋은 옷’</em>을 입혀 주셨다면, 되갚지 않을 자유가 그 자리에서 어떻게 드러날지 나눠 봅시다.",
+    hint:"(부담되면 넘어가셔도 괜찮습니다.)",
+    prayer:[
+      "주님, 저희는 더 큰 치욕을 감당하기는커녕<br>작은 무시에도 더 크게 되갚고 싶어했고,<br>때로는 저희가 가진 힘으로<br>곁의 사람에게 치욕을 주며 살았음을 고백합니다.",
+      "그 모든 것이, 죄로 들어온 부끄러움을<br>스스로 가리려는 몸부림이었음을 되돌아 봅니다.<br>무화과 잎으로 가린 저희의 수치는<br>아침이면 마르고, 또 말랐습니다.",
+      "그러나 뺨을 돌려 대라 하신 주님이 먼저 맞으시고,<br>겉옷까지 빼앗겨 발가벗겨지시고,<br>아무도 시키지 않은 골고다 길을 걸으시어<br>저희 치욕을 치욕으로 치유하셨습니다.",
+      "이제 구원의 옷, 공의의 겉옷을 입은 저희가<br>되갚지 않을 자유로 살게 하시고,<br>열매 맺는 나무처럼 기꺼이 내어 주며<br>주님의 기쁨임을 기억하게 하옵소서."
+    ],
+    amen:"우리를 아름답게 옷 입히신 예수님의 이름으로 기도합니다. 아멘.",
+    shareExample:"예를 들면 — ‘운전하거나 아이를 대할 때 무시당했다 싶으면 바로 더 크게 되갚고 싶어집니다. 그런데 그게 사실은 내 부끄러움이 드러날까 봐 상대를 먼저 눌러버리는 거더라고요. 나는 이미 그리스도의 옷을 입었다를 기억하면, 굳이 되갚지 않고 한 번 져 줄 여유가 생깁니다.’ (정답이 아니라 참고용 예시입니다.)"
+  },
+  {
+    date:"2026. 10. 18. 주일", short:"10/18",
+    ref:"로마서 4:4~5", title:"하나님은 어떤 표정이실까?",
+    answers:[
+      "5절은 하나님을 <em>‘경건하지 아니한 자를 의롭다 하시는 이’</em>라고 말합니다. 일한 삯은 당연한 보수지만, 일하지 않은 자가 믿음으로 받는 의는 순전한 은혜입니다.",
+      "복음 쪽입니다 — <em>‘받아 주셨기에 순종한다’</em>. 본문은 ‘일을 아니할지라도’ 믿는 자에게 그 믿음을 의로 여기신다고 하니, 순종이 조건이 아니라 은혜가 먼저입니다."
+    ],
+    shareExample:"예를 들면 — ‘봉사나 큐티를 못 한 주에는 하나님이 나를 실망스럽게 보실 것 같아 기도조차 피하게 됩니다. 그런데 그 표정이 이미 아들을 보는 아버지의 얼굴이라면, 못한 주일수록 오히려 더 당당히 나아가 쉴 수 있겠구나 싶습니다.’ (정답이 아니라 나눔을 돕는 예시예요. 각자의 자리로 편하게 나눠 보세요.)",
+    checks:[
+      "4절은 ‘일한 삯’을 <em>보수</em>로, 5절은 ‘일을 아니한 자가 받는 것’을 <em>은혜</em>로 구분합니다. 그렇다면 5절은 하나님을 <em>‘어떤 자를 의롭다 하시는 분’</em>이라고 말합니까?",
+      "설교는 종교와 복음의 순서가 정반대라고 합니다. 종교는 “순종하면 받아 주신다”, 복음은 <em>“받아 주셨기에 순종한다”</em> — 둘 중 오늘 본문이 말하는 쪽은 어느 것입니까?"
+    ],
+    share:"설교는 “지금 하나님이 나를 보신다면 어떤 표정일까?”를 물었습니다. 우리는 그 답의 근거를 흔히 ‘내가 잘했나·못했나’에 둡니다. 혹시 요즘 하나님의 표정을 <em>‘내 성적표’</em>로 가늠하고 있는 자리가 있나요? 그 표정이 이미 <em>‘아들을 보는 아버지의 얼굴’</em>이라면 무엇이 달라질지 나눠 봅시다.",
+    hint:"(부담되면 넘어가셔도 괜찮습니다.)",
+    prayer:[
+      "주님, 저희는 하나님의 표정을 떠올릴 때마다<br>그 근거를 늘 ‘저 자신’에게 두었습니다.<br>잘하면 미소 지으시고, 못하면 외면하시리라<br>종교의 방식으로 하나님을 오해했습니다.",
+      "그러나 하나님은 사다리를 타고 내려오신 분이셨습니다.<br>죄 없으신 예수님의 장부에 저희 죄를 적으시고,<br>죄뿐인 저희 장부에 그분의 의를 적으셨습니다.<br>공의도 사랑도 조금도 모자람 없이 채우셨습니다.",
+      "그래서 저희를 향한 그 얼굴은 실망일 수 없습니다.<br>진노는 이미 십자가에 다 쏟아졌고,<br>남은 것은 아들을 바라보며 어쩔 줄 몰라 하시는<br>아버지의 얼굴뿐입니다.",
+      "받아 주셨기에 섬기고 싶어지는 자녀 되게 하시고,<br>그 영원한 미소를 누리며 전하고 싶어<br>안달하는 삶으로 저희를 빚어 주옵소서."
+    ],
+    amen:"우리를 아들 삼으신 예수님의 이름으로 기도합니다. 아멘."
+  },
+  {
+    date:"2026. 10. 11. 주일", short:"10/11",
+    ref:"로마서 6:1~14", title:"여기라! 죄에 대하여 죽은 자로",
+    answers:[
+      "죽은 것은 ‘죄’ 자체가 아니라 <em>‘죄의 지배’</em>입니다. 죄의 욕구와 유혹은 여전히 남아 있지만, 죄가 더 이상 주인으로서 나를 명령하지는 못합니다.",
+      "<em>‘여기라’</em>입니다(11절). ‘죄짓지 않도록 더 애쓰라’가 아니라, 이미 일어난 사실 — 내가 죄에 대하여 죽고 하나님께 대하여 살아 있음 — 을 ‘여기라(기억하라)’는 명령입니다."
+    ],
+    shareExample:"예를 들면 — ‘넘어진 다음 날 거울(내 모습)만 보면 역시 난 안 돼 하고 주저앉는데, 나는 그분의 자녀다를 먼저 기억하면 숨지 않고 다시 아버지께 나아가 고백하게 됩니다. 죄책감으로 멀어지는 대신 자녀의 자리로 돌아가 다시 시작하게 돼요.’ (정답이 아니라 참고용 예시입니다.)",
+    checks:[
+      "“은혜를 더하려 죄에 거하겠느냐”는 질문에 바울은 ‘안 된다’가 아니라 <em>“그럴 수 없느니라(불가능하다)”</em>고 답합니다(2절). 그 근거로, 우리에게서 죽은 것은 ‘죄’ 자체입니까, 아니면 <em>‘죄의 지배’</em>입니까?",
+      "바울은 1~10절 내내 ‘일어난 일(소식)’만 전하다가 11절에서 첫 명령을 줍니다. 그 명령은 “죄짓지 않도록 노력하라”가 아니라 무엇입니까? (<em>한 단어</em>)"
+    ],
+    share:"설교는 <em>“거울을 보지 말고 가족관계증명서를 보라”</em>고 합니다. 우리는 넘어질 때 내 모습(거울)만 보며 ‘나는 가짜 아닌가’ 자책하기 쉽죠. <em>‘나는 누구의 자녀인가’를 기억하는 것</em>이 어떤 삶의 변화를 낳을지, 설교의 마지막 적용점을 내 삶에 대입하여 나눠봅시다.",
+    hint:"(부담되면 넘어가셔도 괜찮습니다.)",
+    prayer:[
+      "주님, 저희는 십자가도 은혜도 알면서<br>같은 자리에서 또 넘어지곤 합니다.<br>그때마다 ‘나만 지고 있나, 가짜 아닌가’<br>거울을 보며 자책했습니다.",
+      "그러나 죽은 것은 죄가 아니라 죄의 지배였습니다.<br>저희 옛 사람이 그리스도와 함께 십자가에 못 박혔고,<br>그 값은 아들의 피로 단번에 다 치러졌습니다.<br>사망이 더 이상 저희를 주장하지 못합니다.",
+      "넘어질 때 거울이 아니라<br>가족관계증명서를 보게 하옵소서.<br>잘해서 받으신 것이 아니라, 받아 주셨기에<br>아버지를 닮아 가는 저희 되게 하옵소서.",
+      "절뚝거려도 숨지 않고 나아가게 하시고,<br>넘어진 이에게 ‘너 누구 자녀잖아’ 말해 주는<br>은혜의 공동체 되게 하옵소서."
+    ],
+    amen:"우리를 자녀 삼으신 예수님의 이름으로 기도합니다. 아멘."
+  }
+];
+
+const $=id=>document.getElementById(id);
+let wi=0, ti=0, unlocked=false;
+try{ unlocked = localStorage.getItem("nanum-leader")==="1"; }catch(e){}
+
+function headHTML(w){
+  return `<div class="ctop"></div>
+    <div class="chead">
+      <div class="kick">FELLOWSHIP CHURCH</div>
+      <div class="church">사귐이있는교회</div>
+      <div class="meta">주일 말씀 나눔 · ${w.date}</div>
+      <div class="bigtitle">${w.title}</div>
+      <div class="smref">${w.ref}</div>
+    </div><div class="cdiv"></div>`;
+}
+function tagHTML(n,sub,name){
+  return `<div class="ctag"><div class="dot">${n}</div><div class="tt"><small>${sub}</small><b>${name}</b></div></div>`;
+}
+function revealAns(w){
+  if(!w.answers||!w.answers.length) return "";
+  const rows=w.answers.map((a,n)=>`<div class="arow"><span class="qn">${["①","②","③"][n]||"•"}</span><p>${a}</p></div>`).join("");
+  return `<div class="reveal"><button class="revealbtn" aria-expanded="false" data-open="정답 숨기기" data-closed="정답 보기">정답 보기</button><div class="ans" hidden><div class="lab">본문에서 확인</div>${rows}</div></div>`;
+}
+function revealEx(w){
+  if(!w.shareExample) return "";
+  return `<div class="reveal"><button class="revealbtn" aria-expanded="false" data-open="예시 답안 숨기기" data-closed="예시 답안 보기">예시 답안 보기</button><div class="ans ex" hidden><div class="lab">예시 답안 · 참고용</div><p>${w.shareExample}</p></div></div>`;
+}
+function bodyHTML(w,t){
+  if(t===0){
+    const qs=w.checks.map((c,n)=>`<div class="q"><span class="qn">${["①","②","③"][n]||"•"}</span><p>${c}</p></div>`).join("");
+    return tagHTML(1,"STEP 01","설교 확인 질문")+`<div class="qlist">${qs}</div>`+(unlocked?revealAns(w):"");
+  }
+  if(t===1){
+    const hint=w.hint?`<span class="hint">${w.hint}</span>`:"";
+    return tagHTML(2,"STEP 02","나눔 질문")+`<div class="share">${w.share}${hint}</div>`+(unlocked?revealEx(w):"");
+  }
+  const stz=w.prayer.map(p=>`<div class="stz">${p}</div>`).join("");
+  const amen=w.amen?`<div class="amen">${w.amen}</div>`:"";
+  return tagHTML(3,"STEP 03","함께 드리는 기도")+`<div class="prayer">${stz}${amen}</div>`;
+}
+function render(){
+  const w=WEEKS[wi];
+  $("card").innerHTML=headHTML(w)+`<div class="cbody">${bodyHTML(w,ti)}</div>`+
+    `<div class="cfoot"><span>패밀리 나눔 카드</span><span class="pg">${ti+1} / 3</span></div>`;
+  [0,1,2].forEach(k=>$("tab"+k).setAttribute("aria-selected", k===ti?"true":"false"));
+
+  // 화살표 네비게이션
+  const names=["설교 확인 질문","나눔 질문","함께 드리는 기도"];
+  $("prev").disabled = ti===0;
+  $("next").disabled = ti===2;
+  $("prevlab").textContent = ti>0 ? names[ti-1] : "";
+  $("nextlab").textContent = ti<2 ? names[ti+1] : "";
+  $("dots").innerHTML = [0,1,2].map(k=>`<i class="${k===ti?'on':''}"></i>`).join("");
+}
+function goTab(k){ if(k<0||k>2) return; ti=k; render(); try{window.scrollTo({top:0,behavior:"smooth"});}catch(e){} }
+
+/* 정답/예시 펼치기 (카드에 위임 — 재렌더 후에도 동작) */
+$("card").addEventListener("click",e=>{
+  const b=e.target.closest(".revealbtn"); if(!b) return;
+  const box=b.nextElementSibling; const willOpen=box.hidden;
+  box.hidden=!willOpen;
+  b.setAttribute("aria-expanded",String(willOpen));
+  b.textContent = willOpen ? b.dataset.open : b.dataset.closed;
+});
+
+/* 인도자 모드 — 교회명을 5번 탭하면 정답/예시 버튼이 나타남 */
+function setLeader(v){
+  unlocked=v;
+  try{ localStorage.setItem("nanum-leader", v?"1":"0"); }catch(e){}
+  $("leader").hidden=!v;
+  render();
+}
+let taps=0, tapTimer=null;
+$("church").addEventListener("click",()=>{
+  taps++; clearTimeout(tapTimer); tapTimer=setTimeout(()=>{taps=0;},1600);
+  if(taps>=5){ taps=0; setLeader(true); }
+});
+$("leader").addEventListener("click",()=>setLeader(false));
+$("leader").hidden=!unlocked;
+
+/* 탭 */
+[0,1,2].forEach(k=>$("tab"+k).addEventListener("click",()=>{ ti=k; render(); }));
+/* 이전/다음 화살표 */
+$("prev").addEventListener("click",()=>goTab(ti-1));
+$("next").addEventListener("click",()=>goTab(ti+1));
+
+/* 좌우 스와이프로 넘기기 (카드 위에서) */
+(function(){
+  const el=$("card"); let x0=null,y0=null,t0=0,active=false;
+  el.addEventListener("touchstart",e=>{
+    if(e.touches.length!==1) return;
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY; t0=Date.now(); active=true;
+  },{passive:true});
+  el.addEventListener("touchend",e=>{
+    if(!active||x0===null) return; active=false;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-x0, dy=t.clientY-y0;
+    // 가로로 충분히(50px 이상), 세로보다 더 많이, 빠르게(0.8초 이내) 밀면 넘김
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5 && (Date.now()-t0)<800){
+      if(dx<0) goTab(ti+1);   // 왼쪽으로 밀기 → 다음
+      else goTab(ti-1);       // 오른쪽으로 밀기 → 이전
+    }
+    x0=y0=null;
+  },{passive:true});
+})();
+/* 주차 */
+const sel=$("wk");
+WEEKS.forEach((w,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${w.short} · ${w.title}`; sel.appendChild(o); });
+sel.addEventListener("change",()=>{ wi=+sel.value; ti=0; render(); try{window.scrollTo({top:0});}catch(e){} });
+sel.value="0";
+render();
+</script>
+
+</body>
+</html>
