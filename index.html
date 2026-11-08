@@ -139,7 +139,7 @@ footer{margin-top:20px;text-align:center;color:var(--muted);font-size:12px;line-
 
 <div class="wrap">
   <div class="bar">
-    <div class="who"><span class="dotmark"></span><b id="church">사귐이있는교회</b><span class="leaderchip" id="leader" hidden>인도자 ✕</span></div>
+    <div class="who"><span class="dotmark"></span><b id="church"><span id="saTap">사</span>귐이있는교회</b><span class="leaderchip" id="leader" hidden>인도자 ✕</span></div>
     <select id="wk" aria-label="나눔지 주차 선택"></select>
   </div>
 
@@ -163,6 +163,28 @@ footer{margin-top:20px;text-align:center;color:var(--muted);font-size:12px;line-
 <script>
 /* 매주: WEEKS 배열 맨 앞에 이번 주 항목을 추가해 같은 링크로 다시 올립니다. (최신이 맨 위) */
 const WEEKS = [
+  {
+    date:"2026. 11. 8. 주일", short:"11/8",
+    ref:"로마서 6:15~7:6", title:"이제, 그분의 신부입니다",
+    checks:[
+      "16절에서 바울은 우리가 이미 <em>누군가의 종</em>이 되어 순종하고 있다고 말합니다(“알지 못하느냐”). 바울이 말하는 두 종류의 종은 무엇이며, 각각이 이르는 <em>끝(열매)</em>은 무엇이라고 합니까? (16절·21~23절)",
+      "18절 “죄로부터 <em>해방되어</em>”와 7장 4절 “율법에 대하여 <em>죽임을 당하였으니</em>”를 보십시오. 이 ‘해방’과 ‘죽음’은 우리가 <em>스스로 해낸 일</em>입니까, 아니면 우리에게 <em>일어난(당한) 일</em>입니까? (18절·7:4)",
+    ],
+    answers:[
+      "두 종류의 종은 <em>‘죄의 종’</em>과 <em>‘순종의 종’</em>입니다(16절). 죄의 종은 <em>사망</em>에 이르고(21절 “그 마지막이 사망임이라”, 23절 “죄의 삯은 사망”), 순종의 종은 <em>의</em>에 이릅니다(16절). 23절은 그 대조를 이렇게 맺습니다 — “하나님의 은사는 … 영생이니라.”",
+      "둘 다 우리가 ‘해낸’ 것이 아니라 우리에게 ‘일어난’ 일입니다 — <em>해방되어</em>, <em>죽임을 당하였으니</em> 모두 수동태입니다(18절·7:4). 숨은 행위자는 <em>하나님</em>이시고(‘그리스도의 몸으로 말미암아’가 그 통로), 그래서 17절이 “하나님께 <em>감사</em>하리로다”로 시작합니다. 내가 끊고 나온 것이 아니라 그분이 끊어 주신 것입니다. 그래서 ‘마음 놓고 죄를?’이라는 15절의 질문은 주어부터 틀렸습니다 — 나는 내 구원의 주인이 아니기 때문입니다.",
+    ],
+    share:"설교는 우리가 <em>‘미혼’이 아니라</em>고 말합니다. 누구나 이미 무언가와 결혼해(혹은 그 종이 되어) 살아가고, 하나님이 아니면 그 자리를 평가·비교·통장 잔고 같은 것이 대신 차지한다는 것이죠.<br><br>월리스의 물고기에게 ‘물’이 안 보이듯, 너무 당연해서 나에게는 안 보이는 ‘나의 물’은 무엇일까요? 팀 켈러의 질문을 빌리면 — <em>나는 무엇을 잃을 때 가장 무너질 것 같은가? 나는 지금 무엇에 인생을 걸고 있는가?</em><br><br>혹시 나눌 수 있다면, 요즘 내 마음을 가장 크게 흔드는 그 ‘첫 남편’이 무엇인지, 그리고 그것이 정말 나를 채워 주고 있는지 함께 이야기해 봐도 좋겠습니다.",
+    hint:"(부담되면 넘어가셔도 괜찮습니다.)",
+    prayer:[
+      "주님, 저희는 스스로를 <em>자유한 사람</em>이라 여겼습니다.<br>그러나 사실은 평가에 매이고, 비교에 매이고,<br>통장 잔고에 매여 살아온 것을 고백합니다.<br>저희는 미혼이 아니었습니다.",
+      "그 첫 남편을 붙들고 살아 보니,<br>돌아온 것은 만족이 아니라 수치였고,<br>자유가 아니라 불안이었으며,<br>그 마지막은 사망임을 이제야 봅니다.",
+      "그러한 저희를 위하여,<br>신랑 되신 주님이 먼저 십자가에서 버림받으시고,<br>옷 벗기시는 수치를 대신 당하시며<br>자기 몸을 저희에게 내어 주셨습니다. 감사합니다.",
+      "이제 두려움에 매여 살던 자리에서 저희를 건지셔서,<br>버림받지 않는다는 확신 안에서<br>사랑과 기쁨으로 주님을 따르게 하옵소서.<br>저희를 결코 놓지 않으실 주님을 신뢰합니다.",
+    ],
+    amen:"저희를 신부 삼으시려 자기 몸을 내어 주신 예수님의 이름으로 기도합니다. 아멘.",
+    shareExample:"예를 들면 — ‘사람들의 인정’이 첫 남편일 수 있습니다. 좋은 평가를 받을 땐 살 것 같다가도, 한 사람의 서운한 반응에 하루가 무너진다면 그 자리에 인정이 앉아 있는지도 모릅니다. ‘안정(돈)’이라면 통장 잔고가 마음의 평안을 좌우하겠죠. 정해진 답이 있는 질문은 아니니, ‘이게 없으면 나는 아무것도 아닌 것 같다’ 싶은 것을 편하게 떠올리도록 도와주시면 됩니다. (정답이 아니라 참고용 예시입니다.)"
+  },
   {
     date:"2026. 11. 1. 주일", short:"11/1",
     ref:"마태복음 5:38~42", title:"치욕을 치유하는 치욕",
@@ -238,7 +260,7 @@ try{ unlocked = localStorage.getItem("nanum-leader")==="1"; }catch(e){}
 function headHTML(w){
   return `<div class="ctop"></div>
     <div class="chead">
-      <div class="kick">FELLOWSHIP CHURCH</div>
+      <div class="kick">SAGUIIIM CHURCH</div>
       <div class="church">사귐이있는교회</div>
       <div class="meta">주일 말씀 나눔 · ${w.date}</div>
       <div class="bigtitle">${w.title}</div>
@@ -303,7 +325,7 @@ function setLeader(v){
   render();
 }
 let taps=0, tapTimer=null;
-$("church").addEventListener("click",()=>{
+$("saTap").addEventListener("click",()=>{
   taps++; clearTimeout(tapTimer); tapTimer=setTimeout(()=>{taps=0;},1600);
   if(taps>=5){ taps=0; setLeader(true); }
 });
