@@ -51,7 +51,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1
 .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
 .bar .who{display:flex;align-items:center;gap:9px;min-width:0;}
 .bar .dotmark{width:11px;height:11px;border-radius:50%;background:linear-gradient(140deg,var(--clay),#e3a57f);flex-shrink:0;}
-.bar .who b{font-family:var(--display);font-size:14px;font-weight:800;-webkit-user-select:none;user-select:none;cursor:default;}
+.bar .who b{font-family:var(--display);font-size:14px;font-weight:800;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:default;}
 .leaderchip{font-family:var(--display);font-size:11px;font-weight:800;color:#fff;background:var(--clay);
   border-radius:999px;padding:3px 10px;cursor:pointer;letter-spacing:.5px;}
 .bar select{font-family:var(--body);font-size:13px;font-weight:600;color:var(--ink);
@@ -164,6 +164,29 @@ footer{margin-top:20px;text-align:center;color:var(--muted);font-size:12px;line-
 /* 매주: WEEKS 배열 맨 앞에 이번 주 항목을 추가해 같은 링크로 다시 올립니다. (최신이 맨 위) */
 const WEEKS = [
   {
+    date:"2026. 11. 15. 주일", short:"11/15",
+    ref:"로마서 7:7~25", title:"알면서도 안 되는 우리에게",
+    publishAt:"2026-11-15T14:30:00+09:00",
+    checks:[
+      "바울은 ‘율법이 죄냐’는 질문에 뭐라고 답합니까(7절)? 그리고 ‘탐내지 말라’는 계명이 없었다면 자신이 무엇을 몰랐을 것이라 말하며(7~8절), 12절에서는 율법과 계명을 각각 어떤 것이라고 규정합니까? (7:7~8·12)",
+      "24절에서 바울은 <em>‘어떻게</em> 나를 건져내랴’가 아니라 <em>‘누가</em> 나를 건져내랴’라고 묻습니다. 그는 곧바로 그 물음의 답으로 누구의 이름을 부르며 감사합니까? (7:24~25)",
+    ],
+    answers:[
+      "‘<em>그럴 수 없느니라</em>’ — 율법은 죄가 아닙니다(7절). 다만 율법이 ‘탐내지 말라’ 하지 않았다면 <em>탐심이 죄인 줄</em> 몰랐을 것이라 말하고(7~8절), 12절에서 ‘율법도 <em>거룩</em>하며 계명도 거룩하고 <em>의로우며 선하도다</em>’라고 규정합니다. 율법은 얼룩을 비추는 거울일 뿐, 범인은 거울이 아니라 <em>내 안의 죄</em>입니다.",
+      "‘<em>우리 주 예수 그리스도</em>’입니다(25절). 바울은 방법(How)이 아니라 사람(Who)을 찾았고, 그 이름을 부르며 “하나님께 감사하리로다”라고 외칩니다. 내 의지가 아니라, 우리 대신 정죄를 받으시고 살아나신 그분이 ‘이 사망의 몸에서’ 건져내십니다.",
+    ],
+    share:"설교는 <em>아는 것과 사는 것은 다르다</em>고 말합니다. ‘변명의 여지가 없다’고 알면서도 멈추지 못하는 자리가 우리에게도 있지요. 화내면 안 되는 줄 알면서 화를 내고, 비교하지 말자 다짐한 밤에도 남의 인스타를 넘기듯이요.<br><br>요즘 내게 ‘<em>알면서도 잘 안 되는</em>’ 자리는 어디인가요? 꼭 큰일이 아니어도 좋습니다. 반복되는 말버릇, 미루는 습관, 자꾸 올라오는 비교의 마음 같은 것 말입니다.<br><br>혹시 나눌 수 있다면, 그 자리에서 넘어졌을 때 나는 보통 ‘나는 왜 이 모양일까’(거울)로 가는지, 아니면 ‘그래도 나는 그리스도의 것’(가족관계증명서)으로 돌아오는지 함께 이야기해 봐도 좋겠습니다.",
+    hint:"(부담되면 넘어가셔도 괜찮습니다.)",
+    prayer:[
+      "주님, 저희는 <em>알면서도 안 되는</em> 사람입니다.<br>옳은 길을 몰라서가 아니라,<br>알고도 그 길을 걷지 못해 넘어집니다.<br>율법이라는 거울 앞에 서니,<br>괜찮은 줄 알았던 제 모습이 드러납니다.",
+      "원하는 선은 행하지 못하고<br>도리어 미워하는 악을 행하는 저를 봅니다.<br>더 세게 결심할수록 더 빨리 지칠 뿐,<br>제 의지로는 이 끌어당김을 이길 수 없음을 고백합니다.",
+      "그때 ‘누가 나를 건져내랴’ 탄식하는 자리에서,<br>저희는 <em>우리 주 예수 그리스도</em>를 부릅니다.<br>한 번도 탐내지 않으신 그분이<br>저희가 받을 정죄를 대신 받으시고,<br>사흘 만에 살아나셨으니 감사합니다.",
+      "이제 더 높이 뛰려 애쓰지 않게 하시고,<br>성령의 바람에 날개를 맡겨 날게 하옵소서.<br>넘어지는 날에도 낙심하지 않고,<br>거울이 아니라 아버지의 이름을 보며<br>다시 일어서게 하옵소서.",
+    ],
+    amen:"저희를 대신해 죄가 되시고 저희를 하나님의 의로 삼으신 예수님의 이름으로 기도합니다. 아멘.",
+    shareExample:"예를 들면 — ‘가족에게 자꾸 날카롭게 말하는 것’이 그런 자리일 수 있습니다. 안 그래야지 알면서도 피곤하면 또 튀어나오죠. 중요한 건 넘어진 다음입니다. ‘난 원래 이런 사람’이라며 포기하거나 ‘나는 쓰레기야’라며 자책에 빠지는 대신, ‘제가 했습니다(책임), 그러나 이 죄가 제 이름은 아닙니다(신분)’로 돌아오도록 도와주세요. 죄를 미워하며 아파하는 그 마음 자체가 새 생명의 증거라는 점도요. (정답이 아니라 참고용 예시입니다.)"
+  },
+  {
     date:"2026. 11. 8. 주일", short:"11/8",
     ref:"로마서 6:15~7:6", title:"이제, 그분의 신부입니다",
     checks:[
@@ -256,6 +279,10 @@ const WEEKS = [
 const $=id=>document.getElementById(id);
 let wi=0, ti=0, unlocked=false;
 try{ unlocked = localStorage.getItem("nanum-leader")==="1"; }catch(e){}
+function availableWeeks(){
+  const now=Date.now();
+  return WEEKS.filter(w=> unlocked || !w.publishAt || new Date(w.publishAt).getTime()<=now);
+}
 
 function headHTML(w){
   return `<div class="ctop"></div>
@@ -293,7 +320,9 @@ function bodyHTML(w,t){
   return tagHTML(3,"STEP 03","함께 드리는 기도")+`<div class="prayer">${stz}${amen}</div>`;
 }
 function render(){
-  const w=WEEKS[wi];
+  const list=availableWeeks();
+  if(wi>=list.length||wi<0) wi=0;
+  const w=list[wi];
   $("card").innerHTML=headHTML(w)+`<div class="cbody">${bodyHTML(w,ti)}</div>`+
     `<div class="cfoot"><span>패밀리 나눔 카드</span><span class="pg">${ti+1} / 3</span></div>`;
   [0,1,2].forEach(k=>$("tab"+k).setAttribute("aria-selected", k===ti?"true":"false"));
@@ -322,13 +351,24 @@ function setLeader(v){
   unlocked=v;
   try{ localStorage.setItem("nanum-leader", v?"1":"0"); }catch(e){}
   $("leader").hidden=!v;
-  render();
+  wi=0; ti=0;
+  buildSel(); render();
+  lastCount=availableWeeks().length;
 }
-let taps=0, tapTimer=null;
-$("saTap").addEventListener("click",()=>{
-  taps++; clearTimeout(tapTimer); tapTimer=setTimeout(()=>{taps=0;},1600);
-  if(taps>=5){ taps=0; setLeader(true); }
-});
+/* 인도자 잠금 해제: "사귐이있는교회"를 길게(0.7초) 꾹 누르기 */
+(function(){
+  const el=$("church"); let timer=null, fired=false;
+  const start=()=>{ fired=false; clearTimeout(timer); timer=setTimeout(()=>{ fired=true; setLeader(true); },700); };
+  const cancel=()=>{ clearTimeout(timer); };
+  el.addEventListener("touchstart",start,{passive:true});
+  el.addEventListener("touchend",cancel);
+  el.addEventListener("touchmove",cancel,{passive:true});
+  el.addEventListener("touchcancel",cancel);
+  el.addEventListener("mousedown",start);
+  el.addEventListener("mouseup",cancel);
+  el.addEventListener("mouseleave",cancel);
+  el.addEventListener("contextmenu",e=>{ if(fired) e.preventDefault(); });
+})();
 $("leader").addEventListener("click",()=>setLeader(false));
 $("leader").hidden=!unlocked;
 
@@ -359,10 +399,23 @@ $("next").addEventListener("click",()=>goTab(ti+1));
 })();
 /* 주차 */
 const sel=$("wk");
-WEEKS.forEach((w,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${w.short} · ${w.title}`; sel.appendChild(o); });
+function buildSel(){
+  const list=availableWeeks();
+  if(wi>=list.length||wi<0) wi=0;
+  sel.innerHTML="";
+  list.forEach((w,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=`${w.short} · ${w.title}`; sel.appendChild(o); });
+  sel.value=String(wi);
+}
 sel.addEventListener("change",()=>{ wi=+sel.value; ti=0; render(); try{window.scrollTo({top:0});}catch(e){} });
+let lastCount=availableWeeks().length;
+buildSel();
 sel.value="0";
 render();
+/* 예약 공개: 공개 시각이 지나면 자동으로 최신 주차가 열림 */
+setInterval(()=>{
+  const n=availableWeeks().length;
+  if(n!==lastCount){ lastCount=n; wi=0; ti=0; buildSel(); render(); }
+},15000);
 </script>
 
 </body>
